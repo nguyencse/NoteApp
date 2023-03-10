@@ -1,4 +1,4 @@
-package com.example.noteapp.features.note.presentation
+package com.example.noteapp.features.note.presentation.notes
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +57,7 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    fun getNotes(noteOrder: NoteOrder) {
+    private fun getNotes(noteOrder: NoteOrder) {
         getNotesJob?.cancel()
         getNotesJob = noteUseCase.getNotes(noteOrder).onEach {
             _state.value = _state.value.copy(notes = it, noteOrder = noteOrder)
