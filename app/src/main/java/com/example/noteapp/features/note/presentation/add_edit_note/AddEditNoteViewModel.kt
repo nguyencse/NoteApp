@@ -20,10 +20,28 @@ class AddEditNoteViewModel @Inject constructor(
     private val noteUseCase: NoteUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _noteTitle = mutableStateOf(NoteTextFieldState())
+
+    init {
+        savedStateHandle.get<Int>("noteId")?.let { noteId ->
+            if (noteId != -1) {
+                viewModelScope.launch {
+                    noteUseCase.getNoteById(noteId)?.also { note ->
+                        currentNoteId = note.id
+                        _noteTitle.value =
+                            _noteTitle.value.copy(text = note.title, isHintVisible = false)
+                        _noteContent.value =
+                            _noteContent.value.copy(text = note.content, isHintVisible = false)
+                        _noteColor.value = note.color
+                    }
+                }
+            }
+        }
+    }
+
+    private val _noteTitle = mutableStateOf(NoteTextFieldState(hint = "Enter title"))
     val noteTitle: State<NoteTextFieldState> = _noteTitle
 
-    private val _noteContent = mutableStateOf(NoteTextFieldState())
+    private val _noteContent = mutableStateOf(NoteTextFieldState(hint = "Enter some content"))
     val noteContent: State<NoteTextFieldState> = _noteContent
 
     private val _noteColor = mutableStateOf(Note.listOfColors.random().toArgb())
@@ -77,9 +95,9 @@ class AddEditNoteViewModel @Inject constructor(
             }
         }
     }
-}
 
-sealed class UiEvent {
-    data class ShowSnackBar(val message: String) : UiEvent()
-    object SaveNote : UiEvent()
+    sealed class UiEvent {
+        data class ShowSnackBar(val message: String) : UiEvent()
+        object SaveNote : UiEvent()
+    }
 }

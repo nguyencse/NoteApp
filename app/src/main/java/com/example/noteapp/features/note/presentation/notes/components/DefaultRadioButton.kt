@@ -12,21 +12,45 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+//@Composable
+//fun DefaultRadioButton(
+//    title: String, checked: Boolean, onSelect: () -> Unit, modifier: Modifier
+//) {
+//    Row(
+//        modifier = modifier,
+//        verticalAlignment = Alignment.CenterVertically,
+//    ) {
+//        RadioButton(
+//            selected = checked, onClick = onSelect, colors = RadioButtonDefaults.colors(
+//                selectedColor = MaterialTheme.colors.primary,
+//                unselectedColor = MaterialTheme.colors.onBackground
+//            )
+//        )
+//        Spacer(modifier = modifier.width(8.dp))
+//        Text(text = title, style = MaterialTheme.typography.body1)
+//    }
+//}
+
 @Composable
 fun DefaultRadioButton(
-    title: String, checked: Boolean, onSelect: () -> Unit, modifier: Modifier
+    text: String,
+    selected: Boolean,
+    onSelect: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
-            selected = checked, onClick = onSelect, colors = RadioButtonDefaults.colors(
+            selected = selected,
+            onClick = onSelect,
+            colors = RadioButtonDefaults.colors(
                 selectedColor = MaterialTheme.colors.primary,
                 unselectedColor = MaterialTheme.colors.onBackground
             )
         )
-        Spacer(modifier = modifier.width(8.dp))
-        Text(text = title, style = MaterialTheme.typography.body1)
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = text, style = MaterialTheme.typography.body1)
     }
 }

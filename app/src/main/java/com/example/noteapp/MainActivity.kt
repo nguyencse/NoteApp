@@ -9,9 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.noteapp.features.note.presentation.add_edit_note.AddEditNotePage
 import com.example.noteapp.features.note.presentation.notes.NotePage
 import com.example.noteapp.features.note.presentation.utils.NoteAppRoute
 import com.example.noteapp.ui.theme.NoteAppTheme
@@ -34,8 +37,17 @@ class MainActivity : ComponentActivity() {
                         composable(route = NoteAppRoute.NotesPage.routeName) {
                             NotePage(navController = navController)
                         }
-                        composable(route = "disdain") {
-                            NotePage(navController = navController)
+                        composable(route = NoteAppRoute.AddEditPage.routeName + "?noteId={noteId}&noteColor={noteColor}",
+                            arguments = listOf(navArgument(name = "noteId") {
+                                type = NavType.IntType
+                                defaultValue = -1
+                            }, navArgument(name = "noteColor") {
+                                type = NavType.IntType
+                                defaultValue = -1
+                            })
+                        ) {
+                            val color = it.arguments?.getInt("noteColor") ?: -1
+                            AddEditNotePage(navController = navController, noteColor = color)
                         }
                     }
                 }

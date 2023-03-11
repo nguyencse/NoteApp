@@ -20,42 +20,37 @@ fun OrderSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             DefaultRadioButton(
-                title = "Date",
-                checked = noteOrder is NoteOrder.Date,
+                text = "Date",
+                selected = noteOrder is NoteOrder.Date,
                 onSelect = { onOrderChange(NoteOrder.Date(orderType = noteOrder.orderType)) },
-                modifier = modifier
             )
-            Spacer(modifier = modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                title = "Title",
-                checked = noteOrder is NoteOrder.Title,
+                text = "Title",
+                selected = noteOrder is NoteOrder.Title,
                 onSelect = { onOrderChange(NoteOrder.Title(orderType = noteOrder.orderType)) },
-                modifier = modifier
             )
-            Spacer(modifier = modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                title = "Color",
-                checked = noteOrder is NoteOrder.Color,
+                text = "Color",
+                selected = noteOrder is NoteOrder.Color,
                 onSelect = { onOrderChange(NoteOrder.Color(orderType = noteOrder.orderType)) },
-                modifier = modifier
             )
         }
-        Spacer(modifier = modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
             DefaultRadioButton(
-                title = "Ascending",
-                checked = noteOrder.orderType == OrderType.Ascending,
+                text = "Ascending",
+                selected = noteOrder.orderType == OrderType.Ascending,
                 onSelect = { onOrderChange(noteOrder.copy(OrderType.Ascending)) },
-                modifier = modifier
             )
-            Spacer(modifier = modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                title = "Descending",
-                checked = noteOrder.orderType == OrderType.Descending,
+                text = "Descending",
+                selected = noteOrder.orderType == OrderType.Descending,
                 onSelect = { onOrderChange(noteOrder.copy(OrderType.Descending)) },
-                modifier = modifier
             )
         }
     }

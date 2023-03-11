@@ -12,12 +12,12 @@ import androidx.compose.material.icons.filled.Sort
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.noteapp.features.note.presentation.notes.components.NoteItem
 import com.example.noteapp.features.note.presentation.notes.components.OrderSection
+import com.example.noteapp.features.note.presentation.utils.NoteAppRoute
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -32,7 +32,9 @@ fun NotePage(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate(route = NoteAppRoute.AddEditPage.routeName)
+                },
                 backgroundColor = MaterialTheme.colors.primary,
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
@@ -91,7 +93,9 @@ fun NotePage(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 16.dp, end = 16.dp)
-                            .clickable { },
+                            .clickable {
+                                navController.navigate(NoteAppRoute.AddEditPage.routeName + "?noteId=${state.notes[it].id}&noteColor=${state.notes[it].color}")
+                            },
                     )
                 }
             }
