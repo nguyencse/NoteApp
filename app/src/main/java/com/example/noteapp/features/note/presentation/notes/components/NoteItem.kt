@@ -34,8 +34,8 @@ fun NoteItem(
     Box(modifier = modifier) {
         Canvas(modifier = Modifier.matchParentSize()) {
             val bgClipPath = Path().apply {
-                lineTo(size.width - cutCornerRadius.value, 0f)
-                lineTo(size.width, cutCornerRadius.value)
+                lineTo(size.width - cutCornerRadius.toPx(), 0f)
+                lineTo(size.width, cutCornerRadius.toPx())
                 lineTo(size.width, size.height)
                 lineTo(0f, size.height)
                 lineTo(0f, 0f)
@@ -51,10 +51,13 @@ fun NoteItem(
                 drawRoundRect(
                     color = Color(
                         ColorUtils.blendARGB(note.color, 0x000000, 0.2f)
-                    ), topLeft = Offset(size.width - cutCornerRadius.toPx(), -100f), size = Size(
+                    ),
+                    topLeft = Offset(size.width - cutCornerRadius.toPx(), -100f),
+                    size = Size(
                         width = cutCornerRadius.toPx() + 100f,
                         height = cutCornerRadius.toPx() + 100f,
-                    ), cornerRadius = CornerRadius(cornerRadius.toPx())
+                    ),
+                    cornerRadius = CornerRadius(cornerRadius.toPx()),
                 )
             }
         }

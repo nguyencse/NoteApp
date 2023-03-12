@@ -63,11 +63,13 @@ fun AddEditNotePage(
             FloatingActionButton(
                 onClick = {
                     viewModel.onEvent(AddEditNoteEvent.SaveNote)
-                }, backgroundColor = MaterialTheme.colors.primary
+                },
+                backgroundColor = MaterialTheme.colors.primary,
             ) {
                 Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
             }
-        }, scaffoldState = scaffoldState
+        },
+        scaffoldState = scaffoldState,
     ) {
         Column(
             modifier = Modifier
@@ -114,12 +116,13 @@ fun AddEditNotePage(
                 onFocusChange = {
                     viewModel.onEvent(AddEditNoteEvent.ChangeTitleFocus(it))
                 },
-                isHintVisible = !titleState.isHintVisible,
+                isHintVisible = titleState.isHintVisible,
                 singleLine = true,
                 textStyle = MaterialTheme.typography.h5,
             )
             Spacer(modifier = Modifier.height(16.dp))
-            TransparentTextFieldHint(text = contentState.text,
+            TransparentTextFieldHint(
+                text = contentState.text,
                 hint = contentState.hint,
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
@@ -127,7 +130,7 @@ fun AddEditNotePage(
                 onFocusChange = {
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                 },
-                isHintVisible = !contentState.isHintVisible,
+                isHintVisible = contentState.isHintVisible,
                 singleLine = false,
                 textStyle = MaterialTheme.typography.body1,
                 modifier = Modifier.fillMaxHeight()

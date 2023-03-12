@@ -97,9 +97,9 @@ fun NotePage(
                                 navController.navigate(NoteAppRoute.AddEditPage.routeName + "?noteId=${state.notes[it].id}&noteColor=${state.notes[it].color}")
                             },
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
