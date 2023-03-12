@@ -76,10 +76,11 @@ fun NotePage(
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(count = state.notes.size) {
+                    val note = state.notes[it]
                     NoteItem(
-                        note = state.notes[it],
+                        note = note,
                         onClickDelete = {
-                            viewModel.onEvent(NoteEvent.DeleteNote(state.notes[it]))
+                            viewModel.onEvent(NoteEvent.DeleteNote(note))
                             scope.launch {
                                 val result = scaffoldState.snackbarHostState.showSnackbar(
                                     message = "Note deleted",
@@ -94,7 +95,7 @@ fun NotePage(
                             .fillMaxWidth()
                             .padding(start = 16.dp, end = 16.dp)
                             .clickable {
-                                navController.navigate(NoteAppRoute.AddEditPage.routeName + "?noteId=${state.notes[it].id}&noteColor=${state.notes[it].color}")
+                                navController.navigate(NoteAppRoute.AddEditPage.routeName + "?noteId=${note.id}&noteColor=${note.color}")
                             },
                     )
                     Spacer(modifier = Modifier.height(16.dp))
